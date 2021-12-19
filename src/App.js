@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-// import About from "./components/About";
+import About from "./components/About";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
-// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -24,7 +24,7 @@ function App() {
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#042743";
-      showAlert("dark Mode has been enabled.", "primary");
+      showAlert("dark Mode has been enabled.", "success");
       document.title = "TextUtils | dark Mode";
 
       setInterval(() => {
@@ -37,24 +37,23 @@ function App() {
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
-      showAlert("light Mode has been enabled.", "primary");
+      showAlert("light Mode has been enabled.", "success");
       document.title = "TextUtils | Light Mode";
     }
   };
   return (
     <>
-      {/* <Router> */}
+      <Router>
         <Navbar
           title="textUtils"
           aboutText="About"
           mode={mode}
           toggleMode={toggleMode}
         />
-        <Alert alert={alert} />
-        <div className="container my-3 p-4">
-          {/* <Switch>
+        <Alert alert={alert} />        
+          <Switch>
             <Route path="/about">
-              <About />
+              <About mode={mode} />
             </Route>
             <Route path="/">
               <TextForm
@@ -63,14 +62,8 @@ function App() {
                 mode={mode}
               />
             </Route>
-          </Switch> */}
-          <TextForm
-                showAlert={showAlert}
-                heading="Enter the Text to Analyze below"
-                mode={mode}
-              />
-        </div>
-      {/* </Router> */}
+          </Switch>
+      </Router>
     </>
   );
 }
